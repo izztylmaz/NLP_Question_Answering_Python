@@ -11,6 +11,7 @@ class InputValidator:
             "internet_connection": True,
             "website_available": True,
         }
+
         self.is_okey = True
 
     def __del__(self):
