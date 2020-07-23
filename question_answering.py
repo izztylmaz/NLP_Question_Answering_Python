@@ -1,11 +1,11 @@
 import src.Helper as helper
-from src.Helper import InputValidator, Properties
+from src.data_receiving import InputValidator
+from src.Helper import Properties
 from src.data_receiving.DataReceiver import DataReceiver
 from src.pre_processing.PreProcessor import PreProcessor as pp
 
 
 def main():
-
     ###########################
     """ INPUT VALIDATION """  #
     #####################################################################################
@@ -29,8 +29,7 @@ def main():
     #####################################################################################
 
     """ DATA RECEIVING """
-    #receiver = DataReceiver()
-
+    # receiver = DataReceiver()
 
     """ PRE-PROCESSING """
 
