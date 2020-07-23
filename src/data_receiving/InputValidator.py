@@ -1,6 +1,7 @@
 from ..Helper import Properties
 from urllib.parse import urlparse
 import os
+import requests
 
 
 class InputValidator:
@@ -48,4 +49,5 @@ class InputValidator:
         return self.__on(Properties.referance_url)
 
     def __page_available(self, url):
-        return self.__on(urlparse(url).path)
+        request = requests.get(url)
+        return request.status_code < 400
