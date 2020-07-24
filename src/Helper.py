@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 
 class Properties:
-    debug = True
+    DEBUG = True
 
     supported_file_types = [
         "pdf", "html", "txt"
@@ -38,3 +38,8 @@ def rm_r(self, path):
 
 def chunk_size(self):
     return 8192
+
+
+def debug(module_name, done):
+    if Properties.DEBUG:
+        print('\t' + module_name + ' ' + ('✔' if done else '✗'))

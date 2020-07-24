@@ -15,6 +15,8 @@ class DataReceiver:
         self.file_data_dir = os.getcwd() + "/data/file_data"
         self.file_name = self.make_name(data_address, on_web)
 
+        print("File name is: {self.file_name}")
+
         exit(1)
 
         self.create_repository()
