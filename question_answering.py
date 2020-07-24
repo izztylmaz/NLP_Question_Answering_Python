@@ -20,16 +20,18 @@ def main():
 
     input_validator.validation((file_name, on_web, file_type))
 
-    if input_validator.is_okey:
-        print("OKAY")
-    else:
-        print("ERROR")
+    if not input_validator.is_okey:
+        print("ERROR\nProblems:")
         print([cr for cr, st in input_validator.criteria.items() if not st])
+        exit(1)
+    print("VALIDATION DONE")
 
     #####################################################################################
 
-    """ DATA RECEIVING """
-    # receiver = DataReceiver()
+    #########################
+    """ DATA RECEIVING """  #
+    #####################################################################################
+    receiver = DataReceiver()
 
     """ PRE-PROCESSING """
 

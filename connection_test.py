@@ -7,6 +7,26 @@ def internet_on(hostname):
     return True if os.system("ping -c 1 " + hostname) == 0 else False
 
 
-print(internet_on("stackoverflow.com"))
-print("https://stackoverflow.com/questions/2535055/check-if-remote-host-is-up-in-python")
-print(urlparse("https://stackoverflow.com/questions/2535055/check-if-remote-host-is-up-in-python").netloc)
+# print(internet_on("stackoverflow.com"))
+# print("https://stackoverflow.com/questions/2535055/check-if-remote-host-is-up-in-python")
+# print(urlparse("https://stackoverflow.com/questions/2535055/check-if-remote-host-is-up-in-python").netloc)
+
+address = "https://stackoverflow.com/questions/2535055/check-if-remote-host-is-up-in-python"
+on_web = True
+
+
+def make_name(address, on_web):
+    type = "pdf"
+    address = address.lower()
+    if address[-1] == '/':
+        address = address[:-1]
+    if not address.endswith(tuple(Properties.supported_file_types)):
+        address = address + '.' + type
+    address = address.split('/')[-1] if on_web else os.path.basename(address)
+    return address
+
+
+address = make_name(address, on_web)
+
+print("Address is: " + address)
+print(address.split('/')[-1] if on_web else os.path.basename(address))
