@@ -11,28 +11,26 @@ def main():
     #####################################################################################
 
     file_name = input("Enter file: ")
-    on_web = True if input("Is file on the web(yes/no)?").lower() == 'yes' else False
+    on_web = input("Is file on the web(yes/no): ").lower() == 'yes'
     file_type = input(
         "Please Enter file type " + "Supported file types are -> " + ", ".join(
             Properties.supported_file_types) + " : ").lower()
 
-
     input_validator = InputValidator()
     input_validator.validation((file_name, on_web, file_type))
 
+    # print(input_validator.is_okey)
     if not input_validator.is_okey:
         # print("ERROR\nProblems:")
         # print([cr for cr, st in input_validator.criteria.items() if not st])
-        exit(1)
-    print("VALIDATION DONE")
-
+        return
     #####################################################################################
 
     #########################
     """ DATA RECEIVING """  #
     #####################################################################################
-    #receiver = DataReceiver(file_name, on_web, file_type)
-
+    receiver = DataReceiver(file_name, on_web, file_type)
+    receiver.receive()
     """ PRE-PROCESSING """
 
 

@@ -40,6 +40,14 @@ def chunk_size(self):
     return 8192
 
 
-def debug(module_name, done):
+def debug(module_name, detail, mode):
+    situation_details = ["starting...", "started!", "done!"]
     if Properties.DEBUG:
-        print('\t' + module_name + ' ' + ('✔' if done else '✗'))
+        if mode == "module_debug":
+            print('\t' + module_name + ' ' + ('✔' if detail else '✗'))
+        elif mode == "situation":
+            module_name += " - "
+            detail = situation_details[detail]
+            print(module_name + detail)
+        elif mode == "info":
+            print("\t\t" + module_name + ': ' + detail)

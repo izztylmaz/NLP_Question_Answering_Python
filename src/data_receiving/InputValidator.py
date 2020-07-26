@@ -8,7 +8,7 @@ import subprocess
 
 class InputValidator:
     def __init__(self):
-        print("Input validation starting...")
+        Helper.debug("Input Validation", 0, "situation")
         self.criteria = {
             "file_type": True,
             "exist": True,
@@ -22,40 +22,42 @@ class InputValidator:
         pass
 
     def validation(self, inp):
-        print("Input validation started!")
+        Helper.debug("Input Validation", 1, "situation")
         (src, on_web, file_type) = inp
 
         if file_type not in Properties.supported_file_types:
             self.criteria["file_type"] = False
-            Helper.debug("file_type", False)
+            Helper.debug("file_type", False, "module_debug")
+            self.is_okey = False
         else:
-            Helper.debug("file_type", True)
+            Helper.debug("file_type", True, "module_debug")
         if on_web:
             if self.__internet_on():
-                Helper.debug("internet_connection", True)
+                Helper.debug("internet_connection", True, "module_debug")
                 if not self.__on(urlparse(src).netloc):
-                    Helper.debug("website_available", False)
+                    Helper.debug("website_available", False, "module_debug")
                     self.criteria["website_available"] = False
                     self.criteria["exist"] = False
                     self.is_okey = False
                 elif not self.__page_available(src):
-                    Helper.debug("website_available", True)
-                    Helper.debug("file_exists", False)
+                    Helper.debug("website_available", True, "module_debug")
+                    Helper.debug("file_exists", False, "module_debug")
                     self.criteria["exist"] = False
                     self.is_okey = False
                 else:
-                    Helper.debug("website_available", True)
-                    Helper.debug("file_exists", True)
+                    Helper.debug("website_available", True, "module_debug")
+                    Helper.debug("file_exists", True, "module_debug")
             else:
-                Helper.debug("internet_connection", False)
+                Helper.debug("internet_connection", False, "module_debug")
                 self.criteria["connection"] = False
                 self.is_okey = False
         else:
             if not os.path.isfile(src):
-                Helper.debug("file_exist", False)
+                Helper.debug("file_exist", False, "module_debug")
                 self.criteria["exist"] = False
                 self.is_okey = False
 
+        Helper.debug("Input Validation", 2, "situation")
         return self.is_okey
 
     def __on(self, host_name):
