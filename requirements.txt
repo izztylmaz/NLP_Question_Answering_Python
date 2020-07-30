@@ -1,5 +1,7 @@
 nltk==3.5
 requests==2.24.0
 pdftotext==2.1.4
-sudo apt install libpython3.8-dev
-sudo apt-get install build-essential libpoppler-cpp-dev pkg-config python-dev python3-dev
+#sudo apt install libpython3.8-dev
+#sudo apt-get install build-essential libpoppler-cpp-dev pkg-config python-dev python3-dev
+
+html2text==2020.1.16

@@ -1,18 +1,21 @@
-
 from os.path import join
 
 from jpype import JClass, getDefaultJVMPath, shutdownJVM, startJVM
 
 if __name__ == '__main__':
 
-    ZEMBEREK_PATH: str = join('Dependencies', '..', 'bin', 'zemberek-full.jar')
+    zemberek_path: str = join('..', '..', 'Dependencies', 'Zemberek-Python', 'bin', 'zemberek-full.jar')
 
-    startJVM(
-        getDefaultJVMPath(),
-        '-ea',
-        f'-Djava.class.path={ZEMBEREK_PATH}',
-        convertStrings=False
-    )
+    try:
+        startJVM(
+            getDefaultJVMPath(),
+            '-ea',
+            f'-Djava.class.path={zemberek_path}',
+            convertStrings=False
+        )
+    except:
+        exit(False)
+
 
     TurkishSentenceExtractor: JClass = JClass(
         'zemberek.tokenization.TurkishSentenceExtractor'
@@ -29,4 +32,7 @@ if __name__ == '__main__':
     for i, word in enumerate(sentences):
         print(f'Sentence {i+1}: {word}')
 
-    shutdownJVM()
+    try:
+        shutdownJVM()
+    except:
+        exit(False)

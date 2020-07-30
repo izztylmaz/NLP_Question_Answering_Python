@@ -1,5 +1,7 @@
 import os
 import requests
+import shutil
+
 from pathlib import Path
 from src import Helper
 from src.Helper import Properties
@@ -20,7 +22,7 @@ class DataReceiver:
 
         print("\t\tFile name:", self.file_name)
 
-        self.create_repository()
+        self.__create_repository()
         Helper.debug("create_repository", True, "module_debug")
         print("\t\tRepository location:", self.file_data_dir)
 
@@ -34,38 +36,47 @@ class DataReceiver:
                 data = self.__download()
                 if not data:
                     Helper.debug("download_file", False, "module_debug")
+                    Helper.debug("Data receiving", 2, "situation")
+                    return False
                 else:
                     Helper.debug("download_file", True, "module_debug")
+                    Helper.debug("Data receiving", 2, "situation")
+                    return data, self.file_name
             except:
                 Helper.debug("download_file", False, "module_debug")
+                Helper.debug("Data receiving", 2, "situation")
         else:
             try:
-                self.copy(self.src)
+                data = self.__copy(self.src)
                 Helper.debug("copy_file", True, "module_debug")
+                Helper.debug("Data receiving", 2, "situation")
+                return data, self.file_name
             except:
                 Helper.debug("copy_file", False, "module_debug")
-        Helper.debug("Data receiving", 2, "situation")
+                Helper.debug("Data receiving", 2, "situation")
+                return False
 
     def __download(self):
         r = requests.get(self.src, allow_redirects=True)
-        with open(self.file_data_dir + self.file_name, "wb") as f:
-            f.write(r.content)
-        return r.content
+        if r.content:
+            with open(self.file_data_dir + self.file_name, "wb") as f:
+                f.write(r.content)
+            return r.content
+        else:
+            return False
 
-    def create_repository(self):
+    def __create_repository(self):
         Path(self.file_data_dir).mkdir(parents=True, exist_ok=True)
         self.file_data_dir += '/'
 
-    def copy(self, src):
-        r = requests.get(src, allow_redirects=True)
-        if not r.content:
-            print("EMPTY CONTENT")
-            return False
+    def __copy(self, src):
+        if os.path.isabs(src):
+            shutil.copyfile(src, self.file_data_dir + '/' + self.file_name)
         else:
-            with open(self.file_data_dir + self.file_name, "wb+") as f:
-                f.write(r.content)
-            print("COPIED!")
-            return r.content
+            shutil.copyfile(os.getcwd() + '/' + src, self.file_data_dir + '/' + self.file_name)
+
+        with open(src, 'r') as f:
+            return f.read()
 
     def make_name(self, name, on_web):
         name = name.lower()
