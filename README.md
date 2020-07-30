@@ -1,16 +1,14 @@
-# NLP_Question_Answering_Python
-NLP - Question Answering System Using Python 3.8
-
-This project is my internship final project. 
+# NLP_Turkish_Question_Answering_System_Python
+NLP - Turkish Question Answering System Using Python 3.8
 
 Input
 
-* Article(html, pdf, txt), On web or not, File type
+* Relevant Article, On web or local machine, File type(html, pdf, txt)
 * Question about given article
 
-Output
+Desired Output
 
-* Answer to the question
+* Answer to the relevant question based on the article.
 
 
 Steps
@@ -18,4 +16,4 @@ Steps
 1) Input Validation (In progress)
 2) Pre-Processing
 3) Modelling
-4) ...
+
