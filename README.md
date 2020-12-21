@@ -1,4 +1,4 @@
-# DEPRECATED & new repo -> https://github.com/tlapestand/tqa
+# DEPRECATED & new repo -> https://github.com/lapestand/tqa
 # NLP_Turkish_Question_Answering_System_Python
 NLP - Turkish Question Answering System Using Python 3.8
 
